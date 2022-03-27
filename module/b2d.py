@@ -14,7 +14,7 @@ def print_b2d(binaries=list,decimals=list):
     rown3 = 'Result'
     row1 = len(rown1)
     row2 = len(rown2)
-    if len(rown3) != len(str(decimals[-1])):
+    if len(rown3) >= len(str(decimals[-1])):
         row3 = len(rown3)
     else:
         row3 = len(str(decimals[-1]))
