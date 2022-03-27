@@ -32,7 +32,7 @@ def print_b2d(binaries=list,decimals=list):
     print(f"Binary  : {''.join(reversed(binaries))}")
     print(f"Decimal : {decimal}\n")
     SUP = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
-    print(end="= ")
+    print(f"= {''.join(reversed(binaries))}₂\n",end="= ")
     for i in range(len(binaries)):
         power = str(i).translate(SUP)
         print(end=f"2{power}.{binaries[i]}")
@@ -49,7 +49,7 @@ def print_b2d(binaries=list,decimals=list):
         else:
             print()
 
-    print("=",decimal)
+    print(f"= {decimal}₁₀")
 
 #  
 def binary_to_decimal(binary):
