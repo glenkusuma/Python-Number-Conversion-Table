@@ -1,17 +1,17 @@
 # function to calculate binary to decimal using Doubling Method
-def b2d(binaries=str,i=0,decimals=list()):
+def b2d(binaries=str,power=0,decimals=list()):
     binaries=binaries[::-1]
     for binary in binaries:
-        decimal = 2**i*int(binary)
+        decimal = 2**power*int(binary)
         decimals.append(decimal)
-        i+=1
+        power+=1
     return binaries,decimals
 
 # helper function to print binery to decimal tables
 def print_b2d(binaries=list,decimals=list):
     rown1 = '2ⁿ'
     rown2 = 'Binary'
-    rown3 = 'Result'
+    rown3 = 'Decimal'
     row1 = len(rown1)
     row2 = len(rown2)
     if len(rown3) >= len(str(decimals[-1])):
