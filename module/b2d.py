@@ -1,60 +1,70 @@
-# function to calculate binary to decimal using Doubling Method
-def b2d(binaries=str,power=0,decimals=list()):
-    binaries=binaries[::-1]
-    for binary in binaries:
-        decimal = 2**power*int(binary)
-        decimals.append(decimal)
+# Function to calculate binary to decimal using Doubling Method
+def b2d(bins=str,power=0,decs=list(),decimal=list()):
+    bins=bins[::-1]
+    total = 0
+    for binary in bins:
+        dec = 2**power*int(binary)
+        decs.append(dec)
+        total += dec
+        decimal.append(total)
         power+=1
-    return binaries,decimals
+    return bins,decs,decimal
 
-# helper function to print binery to decimal tables
-def print_b2d(binaries=list,decimals=list):
+# Helper function to print binary to decimal table
+def print_b2d(bins=list,decs=list,decimal=list):
     rown1 = '2ⁿ'
     rown2 = 'Binary'
-    rown3 = 'Decimal'
+    rown3 = '2ⁿ x Binary'
+    rown4 = "Decimal"
     row1 = len(rown1)
     row2 = len(rown2)
-    if len(rown3) >= len(str(decimals[-1])):
+    if len(rown3) >= len(str(decs[-1])):
         row3 = len(rown3)
     else:
-        row3 = len(str(decimals[-1]))
+        row3 = len(str(decs[-1]))
+    if len(rown4) >= len(str(decimal[-1])):
+        row4 = len(rown4)
+    else:
+        row4 = len(str(decimal[-1]))
     print("Binary to Decimal")
-    table_cap = f"+-{''.center(row1,'-')}-+-{''.center(row2,'-')}-+-{''.center(row3,'-')}-+"
+    table_cap = f"+-{''.center(row1,'-')}-+-{''.center(row2,'-')}-+-{''.center(row3,'-')}-+-{''.center(row4,'-')}-+"
     print(table_cap)
-    print(f"| {rown1.ljust(row1)} | {rown2.ljust(row2)} | {rown3.ljust(row3)} |")
+    print(f"| {rown1.ljust(row1)} | {rown2.ljust(row2)} | {rown3.ljust(row4)} | {rown4.ljust(row4)} |")
     print(table_cap)
-    decimal = 0
-    for i in range(len(binaries)):
-        print(f"| {str(i).ljust(row1)} | {str(binaries[i]).ljust(row2)} | {str(decimals[i]).ljust(row3)} |")
-        decimal += decimals[i]
+    dec = 0
+    for i in range(len(bins)):
+        print(f"| {str(i).ljust(row1)} | {str(bins[i]).ljust(row2)} | {str(decs[i]).ljust(row3)} | {str(decimal[i]).ljust(row4)} |")
+        dec += decs[i]
     print(table_cap)
 
-    print(f"Binary  : {''.join(reversed(binaries))}")
-    print(f"Decimal : {decimal}\n")
+    print(f"Binary  : {''.join(reversed(bins))}")
+    print(f"Decimal : {dec}\n")
     SUP = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
-    print(f"= {''.join(reversed(binaries))}₂\n",end="= ")
-    for i in range(len(binaries)):
+
+    print(f"Decimal Calculation Steps\n= ({''.join(reversed(bins))})₂\n",end="= ")
+
+    for i in range(len(bins)-1,-1,-1):
         power = str(i).translate(SUP)
-        print(end=f"2{power}.{binaries[i]}")
-        if i != len(binaries)-1:
+        print(end=f"2{power}.{bins[i]}")
+        if i != 0:
             print(end=" + ")
         else:
             print()
 
     print(end="= ")
-    for i in range(len(decimals)):
-        print(end=f"{decimals[i]}")
-        if i != len(binaries)-1:
+    for i in range(len(decs)-1,-1,-1):
+        print(end=f"{decs[i]}")
+        if i != 0:
             print(end=" + ")
         else:
             print()
 
-    print(f"= {decimal}₁₀")
+    print(f"= ({dec})₁₀")
 
-#  
+#  Wraper function binary to decimal
 def binary_to_decimal(binary):
-    binaries,decimals = b2d(binary)
-    print_b2d(binaries,decimals)
+    bins,decs,decimal = b2d(binary)
+    print_b2d(bins,decs,decimal)
 
 if __name__ == "__main__":
     binary_to_decimal("10000111100101100")
